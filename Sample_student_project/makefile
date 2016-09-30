@@ -1,6 +1,6 @@
 biuld: KW
 
-all: biuld clean biuld archive
+all: biuld clean biuld archive build doc
 
 KW: main.o game.o othello.o 
 	g++ -o KW main.o game.o othello.o 
@@ -16,6 +16,13 @@ othello.o: othello.cc othello.h piece.h colors.h
 
 clean:
 	rm *.o
+
+doc: doxygen -g *.cc *.h 
+
+doczip: doc.tgz
+
+doctgz: html/index.html
+	tar cvzf dac.tgz html
 
 archive:
 	tar -cvf file.tar *
